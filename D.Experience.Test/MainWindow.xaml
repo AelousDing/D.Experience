@@ -1,0 +1,9 @@
+﻿<Window x:Class="D.Experience.Test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:h="clr-namespace:D.Experience.Helper;assembly=D.Experience"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <DatePicker h:ExDatePicker.DisplayMode="Decade" h:ExDatePicker.DateFormat="yyyy"/>
+    </Grid>
+</Window>
