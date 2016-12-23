@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,8 +37,11 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -49,8 +53,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CheckBoxTreeView.cs" />
+    <Compile Include="Controls\HintPasswordBox.xaml.cs">
+      <DependentUpon>HintPasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HintTextbox.xaml.cs">
+      <DependentUpon>HintTextbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MultiSelectionTreeView.cs" />
     <Compile Include="Controls\MultiSelectionTreeViewItem.cs" />
+    <Compile Include="Controls\TextBoxPercent.cs" />
     <Compile Include="DeepCopy\DeepCopyReflection.cs" />
     <Compile Include="DeepCopy\DeepCopySerializer.cs" />
     <Compile Include="DeepCopy\ObjectCopy.cs" />
@@ -58,14 +69,26 @@
     <Compile Include="ExcelHelp\ExportOperation.cs" />
     <Compile Include="ExcelHelp\IExportFactory.cs" />
     <Compile Include="Helper\ExDatePicker.cs" />
+    <Compile Include="Helper\NPOIHelper.cs" />
+    <Compile Include="Helper\PasswordBoxAttach.cs" />
+    <Compile Include="Print\PrintHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\HintPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HintTextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
