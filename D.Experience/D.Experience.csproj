@@ -71,6 +71,7 @@
     <Compile Include="Helper\ExDatePicker.cs" />
     <Compile Include="Helper\NPOIHelper.cs" />
     <Compile Include="Helper\PasswordBoxAttach.cs" />
+    <Compile Include="Print\FlowDocumentPrinter.cs" />
     <Compile Include="Print\PrintHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
