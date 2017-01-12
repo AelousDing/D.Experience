@@ -59,8 +59,14 @@
     <Compile Include="Controls\HintTextbox.xaml.cs">
       <DependentUpon>HintTextbox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImagePreview.xaml.cs">
+      <DependentUpon>ImagePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MultiSelectionTreeView.cs" />
     <Compile Include="Controls\MultiSelectionTreeViewItem.cs" />
+    <Compile Include="Controls\ProgressRing.xaml.cs">
+      <DependentUpon>ProgressRing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TextBoxPercent.cs" />
     <Compile Include="DeepCopy\DeepCopyReflection.cs" />
     <Compile Include="DeepCopy\DeepCopySerializer.cs" />
@@ -81,6 +87,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\HintTextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ImagePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProgressRing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

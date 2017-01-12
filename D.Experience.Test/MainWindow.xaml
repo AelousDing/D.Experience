@@ -7,5 +7,7 @@
     <Grid>
         <DatePicker h:ExDatePicker.DisplayMode="Decade" h:ExDatePicker.DateFormat="yyyy"/>
         <control:TextBoxPercent Width="100" Height="100"/>
+        <control:ProgressRing Foreground="Red"/>
+        <Button Width="100" Height="100" Click="Button_Click"/>
     </Grid>
 </Window>

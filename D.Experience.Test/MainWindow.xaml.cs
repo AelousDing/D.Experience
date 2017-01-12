@@ -1,4 +1,5 @@
-﻿using System;
+﻿using D.Experience.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,13 @@ namespace D.Experience.Test
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ImagePreview preview = new ImagePreview(@"C:\Users\dingjm\Desktop\111.jpg");
+            preview.ShowInTaskbar = false;
+            preview.ShowDialog();
         }
     }
 }
