@@ -27,9 +27,18 @@ namespace D.Experience.Test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ImagePreview preview = new ImagePreview(@"C:\Users\dingjm\Desktop\111.jpg");
-            preview.ShowInTaskbar = false;
-            preview.ShowDialog();
+            //ImagePreview preview = new ImagePreview(@"C:\Users\dingjm\Desktop\111.jpg");
+            //preview.ShowInTaskbar = false;
+            //preview.ShowDialog();
+        }
+
+        private void StackPanel_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = e.Source as Button;
+            if (btn != null && btn.Content != null)
+            {
+                frame.Source = new Uri("/Views/" + btn.Content.ToString() + ".xaml", UriKind.RelativeOrAbsolute);
+            }
         }
     }
 }

@@ -3,11 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:h="clr-namespace:D.Experience.Helper;assembly=D.Experience"
         xmlns:control="clr-namespace:D.Experience.Controls;assembly=D.Experience"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="1000">
     <Grid>
-        <DatePicker h:ExDatePicker.DisplayMode="Decade" h:ExDatePicker.DateFormat="yyyy"/>
-        <control:TextBoxPercent Width="100" Height="100"/>
-        <control:ProgressRing Foreground="Red"/>
-        <Button Width="100" Height="100" Click="Button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Button.Click="StackPanel_Click">
+            <Button Content="DrawingTest" Height="30"/>
+        </StackPanel>
+        <Border Grid.Column="1" Background="Blue"/>
+        <Frame Name="frame" Grid.Column="2"/>
     </Grid>
 </Window>

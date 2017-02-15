@@ -27,74 +27,73 @@ namespace D.Experience.Controls
     [TemplateVisualState(Name = "Active", GroupName = "ActiveStates")]
     public class ProgressRing : Control
     {
-        #region 字段
-        private List<Action> _deferredActions = new List<Action>();
-        #endregion
+        public static readonly DependencyProperty BindableWidthProperty = DependencyProperty.Register("BindableWidth", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double), BindableWidthCallback));
 
-        #region 构造函数
+        public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(ProgressRing), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, IsActiveChanged));
+
+        public static readonly DependencyProperty IsLargeProperty = DependencyProperty.Register("IsLarge", typeof(bool), typeof(ProgressRing), new PropertyMetadata(true, IsLargeChangedCallback));
+
+        public static readonly DependencyProperty MaxSideLengthProperty = DependencyProperty.Register("MaxSideLength", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
+
+        public static readonly DependencyProperty EllipseDiameterProperty = DependencyProperty.Register("EllipseDiameter", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
+
+        public static readonly DependencyProperty EllipseOffsetProperty = DependencyProperty.Register("EllipseOffset", typeof(Thickness), typeof(ProgressRing), new PropertyMetadata(default(Thickness)));
+
+        private List<Action> _deferredActions = new List<Action>();
+
         static ProgressRing()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(typeof(ProgressRing)));
-            VisibilityProperty.OverrideMetadata(typeof(ProgressRing), new FrameworkPropertyMetadata(new PropertyChangedCallback(
-                (ringObject, e) =>
-                {
-                    if (e.NewValue != e.OldValue)
-                    {
-                        var ring = (ProgressRing)ringObject;
-                        if ((Visibility)e.NewValue != Visibility.Visible)
-                        {
-                            ring.SetCurrentValue(ProgressRing.IsActiveProperty, false);
-                        }
-                        else
-                        {
-                            ring.IsActive = true;
-                        }
-                    }
-                })));
+            VisibilityProperty.OverrideMetadata(typeof(ProgressRing),
+                                                new FrameworkPropertyMetadata(
+                                                    new PropertyChangedCallback(
+                                                        (ringObject, e) =>
+                                                        {
+                                                            if (e.NewValue != e.OldValue)
+                                                            {
+                                                                var ring = (ProgressRing)ringObject;
+                                                                //auto set IsActive to false if we're hiding it.
+                                                                if ((Visibility)e.NewValue != Visibility.Visible)
+                                                                {
+                                                                    //sets the value without overriding it's binding (if any).
+                                                                    ring.SetCurrentValue(ProgressRing.IsActiveProperty, false);
+                                                                }
+                                                                else
+                                                                {
+                                                                    // #1105 don't forget to re-activate
+                                                                    ring.IsActive = true;
+                                                                }
+                                                            }
+                                                        })));
         }
+
         public ProgressRing()
         {
             SizeChanged += OnSizeChanged;
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        public double MaxSideLength
         {
-            BindableWidth = ActualWidth;
+            get { return (double)GetValue(MaxSideLengthProperty); }
+            private set { SetValue(MaxSideLengthProperty, value); }
         }
-        #endregion
 
-        #region 依赖属性
+        public double EllipseDiameter
+        {
+            get { return (double)GetValue(EllipseDiameterProperty); }
+            private set { SetValue(EllipseDiameterProperty, value); }
+        }
+
+        public Thickness EllipseOffset
+        {
+            get { return (Thickness)GetValue(EllipseOffsetProperty); }
+            private set { SetValue(EllipseOffsetProperty, value); }
+        }
+
         public double BindableWidth
         {
             get { return (double)GetValue(BindableWidthProperty); }
-            set { SetValue(BindableWidthProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for BindableWidth.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BindableWidthProperty =
-            DependencyProperty.Register("BindableWidth", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double), BindableWidthCallback));
-
-        private static void BindableWidthCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ProgressRing ring = d as ProgressRing;
-            if (ring == null)
-            {
-                return;
-            }
-            var action = new Action(() =>
-            {
-                ring.SetEllipseDiameter((double)e.NewValue);
-                ring.SetEllipseOffset((double)e.NewValue);
-                ring.SetMaxSideLength((double)e.NewValue);
-            });
-            if (ring._deferredActions != null)
-            {
-                ring._deferredActions.Add(action);
-            }
-            else
-            {
-                action();
-            }
+            private set { SetValue(BindableWidthProperty, value); }
         }
 
         public bool IsActive
@@ -103,78 +102,34 @@ namespace D.Experience.Controls
             set { SetValue(IsActiveProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsActive.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsActiveProperty =
-            DependencyProperty.Register("IsActive", typeof(bool), typeof(ProgressRing), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, IsActiveChanged));
-
-        private static void IsActiveChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ProgressRing ring = d as ProgressRing;
-            if (ring == null)
-            {
-                return;
-            }
-            ring.UpdateActiveState();
-        }
-
-
         public bool IsLarge
         {
             get { return (bool)GetValue(IsLargeProperty); }
             set { SetValue(IsLargeProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsLarge.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsLargeProperty =
-            DependencyProperty.Register("IsLarge", typeof(bool), typeof(ProgressRing), new PropertyMetadata(true, IsLargeChangedCallback));
-
-        private static void IsLargeChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void BindableWidthCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            ProgressRing ring = d as ProgressRing;
+            var ring = dependencyObject as ProgressRing;
             if (ring == null)
-            {
                 return;
-            }
-            ring.UpdateLargeState();
+
+            var action = new Action(() =>
+            {
+                ring.SetEllipseDiameter(
+                    (double)dependencyPropertyChangedEventArgs.NewValue);
+                ring.SetEllipseOffset(
+                    (double)dependencyPropertyChangedEventArgs.NewValue);
+                ring.SetMaxSideLength(
+                    (double)dependencyPropertyChangedEventArgs.NewValue);
+            });
+
+            if (ring._deferredActions != null)
+                ring._deferredActions.Add(action);
+            else
+                action();
         }
 
-
-        public double MaxSideLength
-        {
-            get { return (double)GetValue(MaxSideLengthProperty); }
-            set { SetValue(MaxSideLengthProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MaxSideLength.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MaxSideLengthProperty =
-            DependencyProperty.Register("MaxSideLength", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
-
-
-        public double EllipseDiameter
-        {
-            get { return (double)GetValue(EllipseDiameterProperty); }
-            set { SetValue(EllipseDiameterProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for EllipseDiameter.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EllipseDiameterProperty =
-            DependencyProperty.Register("EllipseDiameter", typeof(double), typeof(ProgressRing), new PropertyMetadata(default(double)));
-
-
-
-        public Thickness EllipseOffset
-        {
-            get { return (Thickness)GetValue(EllipseOffsetProperty); }
-            set { SetValue(EllipseOffsetProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for EllipseOffset.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty EllipseOffsetProperty =
-            DependencyProperty.Register("EllipseOffset", typeof(Thickness), typeof(ProgressRing), new PropertyMetadata(default(Thickness)));
-
-        #endregion
-
-        #region 方法
         private void SetMaxSideLength(double width)
         {
             MaxSideLength = width <= 20 ? 20 : width;
@@ -189,67 +144,72 @@ namespace D.Experience.Controls
         {
             EllipseOffset = new Thickness(0, width / 2, 0, 0);
         }
-        private void UpdateActiveState()
+
+        private static void IsLargeChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            Action action;
-            if (IsActive)
-            {
-                action = () => VisualStateManager.GoToState(this, "Active", true);
-            }
-            else
-            {
-                action = () => VisualStateManager.GoToState(this, "Inactive", true);
-            }
-            if (_deferredActions != null)
-            {
-                _deferredActions.Add(action);
-            }
-            else
-            {
-                action();
-            }
+            var ring = dependencyObject as ProgressRing;
+            if (ring == null)
+                return;
+
+            ring.UpdateLargeState();
         }
-        /// <summary>
-        /// 更新加载控件中圆多少
-        /// </summary>
+
         private void UpdateLargeState()
         {
             Action action;
 
             if (IsLarge)
-            {
                 action = () => VisualStateManager.GoToState(this, "Large", true);
-            }
             else
-            {
                 action = () => VisualStateManager.GoToState(this, "Small", true);
-            }
-            if (_deferredActions != null)
-            {
-                _deferredActions.Add(action);
-            }
-            else
-            {
-                action();
-            }
-        }
-        #endregion
 
-        #region Override
+            if (_deferredActions != null)
+                _deferredActions.Add(action);
+
+            else
+                action();
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs sizeChangedEventArgs)
+        {
+            BindableWidth = ActualWidth;
+        }
+
+        private static void IsActiveChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        {
+            var ring = dependencyObject as ProgressRing;
+            if (ring == null)
+                return;
+
+            ring.UpdateActiveState();
+        }
+
+        private void UpdateActiveState()
+        {
+            Action action;
+
+            if (IsActive)
+                action = () => VisualStateManager.GoToState(this, "Active", true);
+            else
+                action = () => VisualStateManager.GoToState(this, "Inactive", true);
+
+            if (_deferredActions != null)
+                _deferredActions.Add(action);
+
+            else
+                action();
+        }
+
         public override void OnApplyTemplate()
         {
+            //make sure the states get updated
             UpdateLargeState();
             UpdateActiveState();
             base.OnApplyTemplate();
             if (_deferredActions != null)
-            {
                 foreach (var action in _deferredActions)
-                {
                     action();
-                }
-            }
             _deferredActions = null;
         }
-        #endregion
     }
 }

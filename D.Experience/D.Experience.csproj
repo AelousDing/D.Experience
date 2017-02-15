@@ -68,6 +68,9 @@
       <DependentUpon>ProgressRing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBoxPercent.cs" />
+    <Compile Include="CustomVisul\DrawingCanvas.cs" />
+    <Compile Include="CustomVisul\EllipseTextVisual.cs" />
+    <Compile Include="CustomVisul\IVisualRender.cs" />
     <Compile Include="DeepCopy\DeepCopyReflection.cs" />
     <Compile Include="DeepCopy\DeepCopySerializer.cs" />
     <Compile Include="DeepCopy\ObjectCopy.cs" />
