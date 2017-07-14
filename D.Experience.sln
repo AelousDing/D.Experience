@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D.Experience", "D.Experience\D.Experience.csproj", "{B52671BA-2DE7-4D73-8DFD-4869852C71FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D.Experience.Test", "D.Experience.Test\D.Experience.Test.csproj", "{7AD98C8A-B79B-40BB-A02B-3652C2C1F831}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snippet", "Snippet", "{BFA5C2E9-0471-4CDB-A832-AC2336CCE5CF}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\aelous\Desktop\mvvmprop.snippet = C:\Users\aelous\Desktop\mvvmprop.snippet
+		C:\Users\aelous\Desktop\mvvmpropSet.snippet = C:\Users\aelous\Desktop\mvvmpropSet.snippet
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
