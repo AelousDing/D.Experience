@@ -97,6 +97,7 @@ namespace D.Experience.Controls
         static MultiSelectionTreeViewItem()
         {
             //OverridesDefaultStyleProperty.OverrideMetadata(typeof(MultiSelectionTreeViewItem), new FrameworkPropertyMetadata(typeof(MultiSelectionTreeViewItem)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiSelectionTreeViewItem), new FrameworkPropertyMetadata(typeof(MultiSelectionTreeViewItem)));
         }
         #endregion
 
