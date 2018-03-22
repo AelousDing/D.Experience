@@ -66,8 +66,8 @@
     <Compile Include="Views\DrawingTest.xaml.cs">
       <DependentUpon>DrawingTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MultiTreeview.xaml.cs">
-      <DependentUpon>MultiTreeview.xaml</DependentUpon>
+    <Compile Include="Views\MultiTreeView.xaml.cs">
+      <DependentUpon>MultiTreeView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -85,7 +85,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MultiTreeview.xaml">
+    <Page Include="Views\MultiTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

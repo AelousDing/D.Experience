@@ -12,7 +12,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Button.Click="StackPanel_Click">
             <Button Content="DrawingTest" Height="30"/>
-            <Button Content="MultiTreeview" Height="30"/>
+            <Button Content="MultiTreeView" Height="30"/>
         </StackPanel>
         <Border Grid.Column="1" Background="Blue"/>
         <Frame Name="frame" Grid.Column="2"/>
