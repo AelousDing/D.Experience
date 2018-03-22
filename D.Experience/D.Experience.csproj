@@ -79,6 +79,7 @@
     <Compile Include="ExcelHelp\IExportFactory.cs" />
     <Compile Include="Helper\ExDatePicker.cs" />
     <Compile Include="Helper\FileIcon.cs" />
+    <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\NPOIHelper.cs" />
     <Compile Include="Helper\PasswordBoxAttach.cs" />
     <Compile Include="Print\FlowDocumentPrinter.cs" />
