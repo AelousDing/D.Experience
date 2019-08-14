@@ -131,6 +131,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Log\NLog.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
