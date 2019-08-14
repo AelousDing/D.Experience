@@ -67,6 +67,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\AppEnvironment.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\Startup.cs" />
     <Compile Include="Controls\CheckBoxTreeView.cs" />
     <Compile Include="Controls\HintPasswordBox.xaml.cs">
       <DependentUpon>HintPasswordBox.xaml</DependentUpon>
